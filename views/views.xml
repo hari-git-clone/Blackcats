@@ -1,0 +1,80 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="blackcats.list">
+      <field name="name">blackcats list</field>
+      <field name="model">blackcats.blackcats</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+	  <field name="phone"/>
+	  <field name="qualification"/>
+	  <field name="work"/>
+	  <field name="ht"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="blackcats.form">
+      <field name="name">blackcats list</field>
+      <field name="model">blackcats.blackcats</field>
+      <field name="arch" type="xml">
+        <form>
+	 <group>
+	  <field name="image" widget="image" class= "oe_avatar"/>
+          <field name="name" style="width:30%%"/>
+	  <field name="dob" on_change="onchange_getage_id(dob,context)" style="width:30%%"/>
+	  <field name="phone" style="width:30%%"/>
+          <field name="qualification" style="width:30%%"/>  
+	  <field name="work" style="width:30%%"/>
+	 </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="blackcats.action_window">
+      <field name="name">blackcats window</field>
+      <field name="res_model">blackcats.blackcats</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="blackcats.action_server">
+      <field name="name">blackcats server</field>
+      <field name="model_id" ref="model_blackcats_blackcats"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+
+    <!-- Top menu item -->
+    <menuitem name="blackcats" id="blackcats.menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Menu 1" id="blackcats.menu_1" parent="blackcats.menu_root"/>
+    <menuitem name="Menu 2" id="blackcats.menu_2" parent="blackcats.menu_root"/>
+    <!-- actions -->
+    <menuitem name="List" id="blackcats.menu_1_list" parent="blackcats.menu_1"
+	    action="blackcats.action_window"/>
+
+
+
+
+
+    <!--	    
+    <menuitem name="Server to list" id="blackcats" parent="blackcats.menu_2"
+      action="blackcats.action_server"/>
+    -->
+
+  </data>
+</odoo>
